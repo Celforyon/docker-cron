@@ -7,9 +7,12 @@ LABEL description="CRON server"
 
 RUN apt update \
 	&& apt install --no-install-recommends --no-install-suggests -y \
-		cron \
+		cron procps rsyslog \
 	&& rm -rf /var/lib/apt/lists/*
 
 COPY --from=docker /usr/local/bin/* /usr/local/bin/
 
-ENTRYPOINT ["cron", "-fL15"]
+ADD ./etc /etc
+COPY ./entrypoint /usr/local/bin/entrypoint
+
+ENTRYPOINT ["/usr/local/bin/entrypoint"]
