@@ -7,7 +7,7 @@ LABEL description="CRON server"
 
 RUN apt update \
 	&& apt install --no-install-recommends --no-install-suggests -y \
-		cron curl procps rsyslog \
+		ca-certificates cron curl procps rsyslog \
 	&& rm -rf /var/lib/apt/lists/*
 
 COPY --from=docker /usr/local/bin/* /usr/local/bin/
