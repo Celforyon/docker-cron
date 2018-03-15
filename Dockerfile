@@ -10,4 +10,6 @@ RUN apt update \
 		cron \
 	&& rm -rf /var/lib/apt/lists/*
 
+COPY --from=docker /usr/local/bin/* /usr/local/bin/
+
 ENTRYPOINT ["cron", "-fL15"]
